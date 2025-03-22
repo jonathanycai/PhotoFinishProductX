@@ -15,9 +15,22 @@
 		89F2DD382D8F448500019072 /* PhotoFinish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoFinish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		A936F2262D8F78FE0056EFEE /* Exceptions for "PhotoFinish" folder in "PhotoFinish" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 89F2DD372D8F448500019072 /* PhotoFinish */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		89F2DD3A2D8F448500019072 /* PhotoFinish */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A936F2262D8F78FE0056EFEE /* Exceptions for "PhotoFinish" folder in "PhotoFinish" target */,
+			);
 			path = PhotoFinish;
 			sourceTree = "<group>";
 		};
@@ -264,10 +277,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PhotoFinish/Preview Content\"";
-				DEVELOPMENT_TEAM = KT3V2K3WXL;
+				DEVELOPMENT_TEAM = KYJMF6TJJJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSCameraUsageDescription = "Let PhotoFinish capture your completed tasks with your camera?";
+				INFOPLIST_FILE = PhotoFinish/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -278,7 +292,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = jonathan.PhotoFinish;
+				PRODUCT_BUNDLE_IDENTIFIER = jasper.PhotoFinish;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -294,10 +308,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PhotoFinish/Preview Content\"";
-				DEVELOPMENT_TEAM = KT3V2K3WXL;
+				DEVELOPMENT_TEAM = KYJMF6TJJJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSCameraUsageDescription = "Let PhotoFinish capture your completed tasks with your camera?";
+				INFOPLIST_FILE = PhotoFinish/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -308,7 +323,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = jonathan.PhotoFinish;
+				PRODUCT_BUNDLE_IDENTIFIER = jasper.PhotoFinish;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

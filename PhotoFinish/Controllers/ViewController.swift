@@ -5,8 +5,15 @@
 
 import AVFoundation
 import UIKit
+import FirebaseStorage
+import FirebaseFirestore
 
 class ViewController: UIViewController {
+    
+    var retrievedImages = [UIImage]()
+    var selectedImage: UIImage?
+
+    
     
     // Capture Session
     var session: AVCaptureSession?
@@ -122,6 +129,46 @@ class ViewController: UIViewController {
         }
     }
     
+    private func uploadPhoto() {
+            // Make sure we have a selected image before proceeding
+            guard let selectedImage = self.selectedImage,
+                  let imageData = selectedImage.jpegData(compressionQuality: 0.8) else {
+                print("Error: No image selected or failed to convert image to data")
+                return
+            }
+            
+            // Create storage reference
+            let storageRef = Storage.storage().reference()
+            
+            // Specify filepath and name
+            let path = "images/\(UUID().uuidString).jpg"
+            let fileRef = storageRef.child(path)
+            
+            // Upload data
+            _ = fileRef.putData(imageData, metadata: nil) { metadata, error in
+                if error == nil && metadata != nil {
+                    print("Successfully uploaded image")
+                    
+                    let db = Firestore.firestore()
+                    db.collection("images").document().setData(["url": path]) { error in
+                        
+                        //if no error, handle success
+                        if error == nil {
+                            DispatchQueue.main.async {
+                                // Add uploaded image to list of images
+                                self.retrievedImages.append(selectedImage)
+                                print("Image reference saved to Firestore")
+                            }
+                        } else {
+                            print("Error saving to Firestore: \(error?.localizedDescription ?? "unknown error")")
+                        }
+                    }
+                } else {
+                    print("Error uploading: \(error?.localizedDescription ?? "unknown error")")
+                }
+            }
+        }
+    
     @objc private func didTapTakePhoto() {
         let settings = AVCapturePhotoSettings()
         settings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA]
@@ -153,6 +200,14 @@ class ViewController: UIViewController {
     
     // Action for Complete Task button: Redirect to a different view
     @objc private func completeTaskButtonTapped() {
+        
+        if selectedImage == nil {
+                print("No image to upload")
+                // Maybe show an alert to the user
+                return
+            }
+        
+        uploadPhoto()
         // Create an instance of the new view controller
         let taskCompleteVC = TaskCompleteViewController()
         
@@ -187,6 +242,7 @@ extension ViewController: AVCapturePhotoCaptureDelegate {
         imageView.contentMode = .scaleAspectFill
         imageView.frame = view.bounds
         view.addSubview(imageView)
+        self.selectedImage = image
         
         // Add the "Complete Task" button
         let completeTaskButton = UIButton(frame: CGRect(x: 50,

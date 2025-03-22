@@ -9,21 +9,21 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>jonathan.PhotoFinish</string>
+	<string>jasper.PhotoFinish</string>
 	<key>PROJECT_ID</key>
 	<string>photofinish-ee28e</string>
 	<key>STORAGE_BUCKET</key>
 	<string>photofinish-ee28e.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:781574781667:ios:a11559b3e909fb5c4923d6</string>
 </dict>
