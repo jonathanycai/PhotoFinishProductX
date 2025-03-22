@@ -17,31 +17,53 @@ struct PhotoUpload: View {
     
     var body: some View {
         VStack {
-            // Display the test image
-            if let image = testImage {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 200)
-            } else {
-                Text("Test image not found")
-                    .foregroundColor(.red)
+                // Display the test image
+                if let image = testImage {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 200)
+                } else {
+                    Text("Test image not found")
+                        .foregroundColor(.red)
+                }
+                
+                Button {
+                    uploadPhoto()
+                } label: {
+                    Text("Upload Photo")
+                }
+                .padding()
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(8)
+                
+            /// Display retrieved images
+            Text("Retrieved Images (\(retrievedImages.count))")
+                .font(.headline)
+                .padding(.top)
+
+            ScrollView {
+                LazyVGrid(columns: [
+                    GridItem(.flexible(), spacing: 12),
+                    GridItem(.flexible(), spacing: 12),
+                    GridItem(.flexible(), spacing: 12)
+                ], spacing: 12) { // Increased spacing between rows
+                    ForEach(0..<retrievedImages.count, id: \.self) { index in
+                        Image(uiImage: retrievedImages[index])
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 100, height: 100) // Fixed size with both width and height
+                            .clipShape(RoundedRectangle(cornerRadius: 6))
+                            .padding(4) // Added some padding around each image
+                    }
+                }
+                .padding() // Added padding around the entire grid
             }
-            
-            Button {
-                uploadPhoto()
-            } label: {
-                Text("Upload Photo")
             }
-            .padding()
-            .background(Color.blue)
-            .foregroundColor(.white)
-            .cornerRadius(8)
-        }
-        .padding()
-        .onAppear {
-            retrievePhotos()
-        }
+            .onAppear {
+                retrievePhotos()
+            }
     }
     
     func uploadPhoto() {
@@ -64,7 +86,7 @@ struct PhotoUpload: View {
         let fileRef = storageRef.child(path)
         
         // Upload data
-        let uploadTask = fileRef.putData(imageData, metadata: nil) { metadata, error in
+        _ = fileRef.putData(imageData, metadata: nil) { metadata, error in
             if error == nil && metadata != nil {
                 print("Successfully uploaded image")
                 
@@ -96,11 +118,13 @@ struct PhotoUpload: View {
                 
                 var paths = [String]()
                 
+                //loop through all returned docs
                 for doc in snapshot!.documents {
                     // extract filepath
                     paths.append(doc["url"] as! String)
                 }
                 
+                //loop through filepaths
                 for path in paths {
                     // get reference to storage
                     let storageRef = Storage.storage().reference()
@@ -117,7 +141,7 @@ struct PhotoUpload: View {
                             if let image = UIImage(data: data!) {
                                 
                                 DispatchQueue.main.async {
-                                    retrievedImages.append(image)
+                                    self.retrievedImages.append(image)
                                 }
                             }
                         }
@@ -125,10 +149,6 @@ struct PhotoUpload: View {
                 }
             }
         }
-        
-        //get image data in storage for each for each image reference
-        
-        //display images
     }
 }
 
