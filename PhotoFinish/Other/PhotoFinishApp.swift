@@ -6,6 +6,7 @@
 //
 import FirebaseCore
 import SwiftUI
+import Firebase
 
 @main
 struct PhotoFinishApp: App {
@@ -17,6 +18,10 @@ struct PhotoFinishApp: App {
         WindowGroup {
             MainView()
         }
+    }
+    
+    init() {
+        FirebaseApp.configure()
     }
 }
 
