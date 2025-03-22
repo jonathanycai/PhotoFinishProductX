@@ -19,15 +19,22 @@ struct LoginView: View {
                 // Header
                 HeaderView()
                 
+                
                 // Login View
                 Form {
+                    
+                    if !viewModel.errorMessage.isEmpty {
+                        Text(viewModel.errorMessage)
+                            .foregroundStyle(Color.red)
+                    }
+                    
                     TextField("Email Address", text: $viewModel.email)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .autocapitalization(.none)
                     SecureField("Password", text: $viewModel.password)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     TLButton(title: "Log In", background: .blue) {
-                        // Attempt login
+                        viewModel.login()
                     }
                 }
                 
