@@ -21,21 +21,13 @@ struct LoginView: View {
                 
                 // Login View
                 Form {
-                    TextField("Email Address", text: $email)
+                    TextField("Email Address", text: $viewModel.email)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                    SecureField("Email Address", text: $password)
+                        .autocapitalization(.none)
+                    SecureField("Password", text: $viewModel.password)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                    Button {
-                        // Attempt log in
-                    } label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .foregroundColor(Color.blue)
-                            
-                            Text("Log in")
-                                .foregroundColor(Color.white)
-                                .bold()
-                        }
+                    TLButton(title: "Log In", background: .blue) {
+                        // Attempt login
                     }
                 }
                 
