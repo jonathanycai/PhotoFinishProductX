@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct PhotoFinishApp: App {
@@ -14,5 +15,9 @@ struct PhotoFinishApp: App {
             CameraView()
                 .ignoresSafeArea()
         }
+    }
+    
+    init() {
+        FirebaseApp.configure()
     }
 }
