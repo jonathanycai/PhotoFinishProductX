@@ -11,7 +11,8 @@ import SwiftUI
 struct PhotoFinishApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CameraView()
+                .ignoresSafeArea()
         }
     }
 }
