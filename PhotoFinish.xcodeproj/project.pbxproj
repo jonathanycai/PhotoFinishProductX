@@ -12,6 +12,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0225B8F12D8F7860009C5658 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		89F2DD382D8F448500019072 /* PhotoFinish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoFinish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -52,6 +53,7 @@
 		89F2DD2F2D8F448500019072 = {
 			isa = PBXGroup;
 			children = (
+				0225B8F12D8F7860009C5658 /* .gitignore */,
 				89F2DD3A2D8F448500019072 /* PhotoFinish */,
 				89F2DD392D8F448500019072 /* Products */,
 			);
@@ -134,6 +136,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0225B8F22D8F7867009C5658 /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
