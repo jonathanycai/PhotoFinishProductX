@@ -1,16 +1,15 @@
 //
-//  LoginView.swift
+//  RegisterView.swift
 //  PhotoFinish
 //
-//  Created by Renata Liu on 2025-03-22.
+//  Created by Jonathan Cai on 2025-03-22.
 //
 
-import FirebaseCore
 import SwiftUI
 
-struct LoginView: View {
+struct RegisterView: View {
     
-    @StateObject var viewModel = LoginViewViewModel()
+    @StateObject var viewModel = RegisterViewViewModel()
     @State private var isPasswordVisible = false
     
     var body: some View {
@@ -22,25 +21,31 @@ struct LoginView: View {
                 VStack(spacing: 20) {
                     HeaderView()
                     
-                    Text("Log In")
+                    Text("Sign Up")
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .padding(.top, 40)
                         .overlay(
                             LinearGradient(
-                                gradient: Gradient(colors: [.mainBlue, .lightBlue]),
+                                gradient: Gradient(colors: [Color(.mainBlue), Color(.lightBlue)]),
                                 startPoint: .leading,
                                 endPoint: .trailing
                             )
                         )
                         .mask(
-                            Text("Log in")
+                            Text("Sign Up")
                                 .font(.largeTitle)
                                 .fontWeight(.bold)
                         )
                     
                     // Form fields with the clean design
                     VStack(spacing: 16) {
+                        TextField("Name", text: $viewModel.name)
+                            .padding()
+                            .background(Color.white.opacity(0.9))
+                            .cornerRadius(20)
+                            .autocapitalization(.none)
+                        
                         // Email field
                         TextField("Email", text: $viewModel.email)
                             .padding()
@@ -74,24 +79,18 @@ struct LoginView: View {
                     }
                     .padding(.horizontal, 20)
                     
-                    if !viewModel.errorMessage.isEmpty {
-                        Text(viewModel.errorMessage)
-                            .foregroundColor(.red)
-                            .padding(.top, 10)
-                    }
-                    
                     // Login button could go here
-                    TLButton(title: "Log In", background: Color(.mainBlue)) {
-                        viewModel.login()
+                    TLButton(title: "Sign Up", background: Color(.mainBlue)) {
+                        viewModel.register()
                     }
                     .padding(.top, 30)
                     .padding(.horizontal, 20)
                     .frame(width: 200, height: 80)
                     
                     HStack {
-                        Text("New around here?")
+                        Text("Already have an account?")
                             .foregroundColor(Color(.lightBlue))
-                        NavigationLink("Sign Up", destination: RegisterView())
+                        NavigationLink("Log In", destination: LoginView())
                             .foregroundColor(Color(.mainBlue))
                     }
                     .padding(.top, 20)
@@ -106,5 +105,5 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView()
+    RegisterView()
 }
