@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ToDoListItemView: View {
     @StateObject var viewModel = ProfileViewViewModel()
+    @State private var showingSheet = false
     let item: ToDoListItem
     var body: some View {
         HStack {
@@ -24,9 +25,13 @@ struct ToDoListItemView: View {
             
             Button {
                 viewModel.toggleIsDone(item: item)
+                showingSheet = true
             } label: {
                 Image(systemName: item.isDone ? "checkmark.circle.fill" : "circle")
                     .foregroundColor(Color.blue)
+            }
+            .sheet(isPresented: $showingSheet) {
+                ContentView()
             }
         }
     }
