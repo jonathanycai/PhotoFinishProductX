@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0225B8F22D8F7867009C5658 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 0225B8F12D8F7860009C5658 /* .gitignore */; };
 		0225BB942D8FC2CB009C5658 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0225BB932D8FC2CB009C5658 /* FirebaseAuth */; };
+		8977707D2D9004FF000C6AB2 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 8977707C2D9004FF000C6AB2 /* FirebaseAuth */; };
 		A9A619EC2D8F51F80047F7DF /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = A9A619EB2D8F51F80047F7DF /* FirebaseFirestore */; };
 		A9A619EE2D8F51F80047F7DF /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A9A619ED2D8F51F80047F7DF /* FirebaseStorage */; };
 /* End PBXBuildFile section */
@@ -47,6 +48,7 @@
 				A9A619EC2D8F51F80047F7DF /* FirebaseFirestore in Frameworks */,
 				0225BB942D8FC2CB009C5658 /* FirebaseAuth in Frameworks */,
 				A9A619EE2D8F51F80047F7DF /* FirebaseStorage in Frameworks */,
+				8977707D2D9004FF000C6AB2 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,6 +95,7 @@
 				A9A619EB2D8F51F80047F7DF /* FirebaseFirestore */,
 				A9A619ED2D8F51F80047F7DF /* FirebaseStorage */,
 				0225BB932D8FC2CB009C5658 /* FirebaseAuth */,
+				8977707C2D9004FF000C6AB2 /* FirebaseAuth */,
 			);
 			productName = PhotoFinish;
 			productReference = 89F2DD382D8F448500019072 /* PhotoFinish.app */;
@@ -284,7 +287,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PhotoFinish/Preview Content\"";
-				DEVELOPMENT_TEAM = KT3V2K3WXL;
+				DEVELOPMENT_TEAM = KR62HGYJ9F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PhotoFinish/Info.plist;
@@ -300,7 +303,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = renata.PhotoFinish;
+				PRODUCT_BUNDLE_IDENTIFIER = jonathan34.PhotoFinish;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -316,7 +319,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PhotoFinish/Preview Content\"";
-				DEVELOPMENT_TEAM = KT3V2K3WXL;
+				DEVELOPMENT_TEAM = KR62HGYJ9F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PhotoFinish/Info.plist;
@@ -332,7 +335,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = renata.PhotoFinish;
+				PRODUCT_BUNDLE_IDENTIFIER = jonathan34.PhotoFinish;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -377,6 +380,11 @@
 /* Begin XCSwiftPackageProductDependency section */
 		0225BB932D8FC2CB009C5658 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseAuth;
+		};
+		8977707C2D9004FF000C6AB2 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A9A619EA2D8F51F80047F7DF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
 		};
 		A9A619EB2D8F51F80047F7DF /* FirebaseFirestore */ = {
