@@ -112,12 +112,15 @@ struct PhotoUpload: View {
                 
                 /// Display retrieved images
                 Text("Recently Completed Tasks")
-                    .font(.headline)
+                    .font(.system(size: 24, weight: .bold))
                     .foregroundColor(Color(red:0.71, green:0.85, blue:0.97))
+                    .padding(.top, 10)
+                    .padding(.bottom, 0)
+                    .offset(y: 10)
 
 
                 ScrollView {
-                    LazyVStack(spacing: 16) {
+                    LazyVStack(spacing: 4) {
                         // Group photos by day
                         ForEach(groupPhotosByDay().keys.sorted(by: >), id: \.self) { day in
                             if let photosIndicesForDay = groupPhotosByDay()[day] {
@@ -126,7 +129,7 @@ struct PhotoUpload: View {
                                         GridItem(.flexible(), spacing: 8),
                                         GridItem(.flexible(), spacing: 8),
                                         GridItem(.flexible(), spacing: 8)
-                                    ], spacing: 12) {
+                                    ], spacing: 6) {
                                         ForEach(photosIndicesForDay, id: \.self) { index in
                                             Image(uiImage: retrievedImages[index])
                                                 .resizable()
@@ -145,13 +148,14 @@ struct PhotoUpload: View {
                                             .font(.system(size: 20, weight: .medium))
                                             .foregroundColor(.white)
                                             .padding(.top, 10)
+                                            .padding(.leading, 14)
+                                            .padding(.bottom, 10)
                                         Spacer()
                                     }
                                 }
                             }
                         }
                     }
-                    .padding() // Added padding around the entire grid
                 }
             }
             .background(Color.black)
