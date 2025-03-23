@@ -15,36 +15,89 @@ struct LoginView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                // Header
-                HeaderView()
+            ZStack {
+                Color.black
+                    .ignoresSafeArea()
                 
-                
-                // Login View
-                Form {
+                VStack(spacing: 20) {
+                    HeaderView()
+                    
+                    Text("Log In")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .padding(.top, 40)
+                        .overlay(
+                            LinearGradient(
+                                gradient: Gradient(colors: [.mainBlue, .lightBlue]),
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            )
+                        )
+                        .mask(
+                            Text("Log in")
+                                .font(.largeTitle)
+                                .fontWeight(.bold)
+                        )
+                    
+                    // Form fields with the clean design
+                    VStack(spacing: 16) {
+                        // Email field
+                        TextField("Email", text: $viewModel.email)
+                            .padding()
+                            .background(Color.white.opacity(0.9))
+                            .cornerRadius(20)
+                            .autocapitalization(.none)
+                            .keyboardType(.emailAddress)
+                        
+                        // Password field with toggle
+                        ZStack(alignment: .trailing) {
+                            if isPasswordVisible {
+                                TextField("Password", text: $viewModel.password)
+                                    .padding()
+                                    .background(Color.white.opacity(0.9))
+                                    .cornerRadius(20)
+                            } else {
+                                SecureField("Password", text: $viewModel.password)
+                                    .padding()
+                                    .background(Color.white.opacity(0.9))
+                                    .cornerRadius(20)
+                            }
+                            
+                            Button(action: {
+                                isPasswordVisible.toggle()
+                            }) {
+                                Image(systemName: isPasswordVisible ? "eye.slash" : "eye")
+                                    .foregroundColor(.gray)
+                            }
+                            .padding(.trailing, 20)
+                        }
+                    }
+                    .padding(.horizontal, 20)
                     
                     if !viewModel.errorMessage.isEmpty {
                         Text(viewModel.errorMessage)
-                            .foregroundStyle(Color.red)
+                            .foregroundColor(.red)
+                            .padding(.top, 10)
                     }
                     
-                    TextField("Email Address", text: $viewModel.email)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .autocapitalization(.none)
-                    SecureField("Password", text: $viewModel.password)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    TLButton(title: "Log In", background: .blue) {
+                    // Login button could go here
+                    TLButton(title: "Log In", background: Color(.mainBlue)) {
                         viewModel.login()
                     }
+                    .padding(.top, 30)
+                    .padding(.horizontal, 20)
+                    .frame(width: 200, height: 80)
+                    
+                    HStack {
+                        Text("New around here?")
+                            .foregroundColor(Color(.lightBlue))
+                        NavigationLink("Sign Up", destination: RegisterView())
+                            .foregroundColor(Color(.mainBlue))
+                    }
+                    .padding(.top, 20)
+                    
+                    Spacer()
                 }
-                
-                VStack {
-                    Text("New around here?")
-                    NavigationLink("Create An Account", destination: RegisterView())
-                }
-                .padding(.bottom, 50)
-                
-                Spacer()
             }
         }
         .navigationBarHidden(true)

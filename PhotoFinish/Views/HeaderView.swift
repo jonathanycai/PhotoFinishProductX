@@ -8,11 +8,6 @@
 import SwiftUI
 
 struct HeaderView: View {
-    let title: String
-    let subtitle: String
-    let angle: Double
-    let background: Color
-    
     var body: some View {
         VStack {
             Image("Logo")
@@ -26,8 +21,5 @@ struct HeaderView: View {
 }
 
 #Preview {
-    HeaderView(title: "Title",
-               subtitle: "Subtitle",
-               angle:15,
-               background: .blue)
+    HeaderView()
 }
