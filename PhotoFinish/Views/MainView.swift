@@ -9,7 +9,8 @@ import SwiftUI
 
 struct MainView: View {
     @StateObject var viewModel = MainViewViewModel()
-    
+    @State private var selection = 2
+
     var body: some View {
         if viewModel.isSignedIn, !viewModel.currentUserId.isEmpty {
             accountView
@@ -20,15 +21,15 @@ struct MainView: View {
     
     @ViewBuilder
     var accountView: some View {
-        TabView {
+        TabView (selection:$selection){
             ToDoListView(userId: viewModel.currentUserId)
                 .tabItem {
                     Label("List", systemImage:"list.clipboard")
-                }
+                }.tag(1)
             PhotoUpload(userId: viewModel.currentUserId)
                 .tabItem {
                     Label("Home", systemImage: "house")
-                }
+                }.tag(2)
             
             NavigationView {
                 CalendarView(
@@ -37,7 +38,7 @@ struct MainView: View {
             }
             .tabItem {
                 Label("Calendar", systemImage: "calendar")
-            }
+            }.tag(3)
         }
     }
 }

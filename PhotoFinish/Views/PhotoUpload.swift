@@ -53,6 +53,8 @@ struct PhotoUpload: View {
                 Text("TODO For Today")
                     .font(.headline)
                     .padding(.top)
+                    .foregroundColor(Color(red:0.71, green:0.85, blue:0.97))
+
                 List(items) { item in
                     ToDoListItemView(item: item)
                 }
@@ -96,8 +98,10 @@ struct PhotoUpload: View {
                 .padding(.bottom, 8)
                 
                 /// Display retrieved images
-                Text("Retrieved Images (\(retrievedImages.count))")
+                Text("Recently Completed Tasks")
                     .font(.headline)
+                    .foregroundColor(Color(red:0.71, green:0.85, blue:0.97))
+
                 
                 ScrollView {
                     LazyVStack(spacing: 20) {
