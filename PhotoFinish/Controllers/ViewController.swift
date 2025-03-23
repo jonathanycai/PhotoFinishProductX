@@ -25,6 +25,13 @@ class ViewController: UIViewController {
     // Video Preview
     let previewLayer = AVCaptureVideoPreviewLayer()
     
+    // Date formatter for parsing filenames
+     private let dateFormatter: DateFormatter = {
+         let formatter = DateFormatter()
+         formatter.dateFormat = "yyyy-MM-dd_HH-mm-ss"
+         return formatter
+     }()
+    
     // Shutter button
     private let shutterButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
@@ -182,45 +189,54 @@ class ViewController: UIViewController {
         }
     }
     
-    private func uploadPhoto() {
-                // Make sure we have a selected image before proceeding
-                guard let selectedImage = self.selectedImage,
-                      let imageData = selectedImage.jpegData(compressionQuality: 0.8) else {
-                    print("Error: No image selected or failed to convert image to data")
-                    return
-                }
+    func uploadPhoto() {
+        // Make sure we have a selected image before proceeding
+        guard let selectedImage = self.selectedImage,
+              let imageData = selectedImage.jpegData(compressionQuality: 0.8) else {
+            print("Error: No image selected or failed to convert image to data")
+            return
+        }
 
-                // Create storage reference
-                let storageRef = Storage.storage().reference()
+            // Create storage reference
+            let storageRef = Storage.storage().reference()
 
-                // Specify filepath and name
-                let path = "images/\(UUID().uuidString).jpg"
-                let fileRef = storageRef.child(path)
+            // Turn image into data
+            guard let imageData = selectedImage.jpegData(compressionQuality: 0.8) else {
+                print("Failed to convert image to data")
+                return
+            }
 
-                // Upload data
-                _ = fileRef.putData(imageData, metadata: nil) { metadata, error in
-                    if error == nil && metadata != nil {
-                        print("Successfully uploaded image")
+            // Get current date and time
+            let currentDate = Date()
 
-                        let db = Firestore.firestore()
-                        db.collection("images").document().setData(["url": path]) { error in
+            // Format the date as a string
+            let dateString = dateFormatter.string(from: currentDate)
 
-                            //if no error, handle success
-                            if error == nil {
-                                DispatchQueue.main.async {
-                                    // Add uploaded image to list of images
-                                    self.retrievedImages.append(selectedImage)
-                                    print("Image reference saved to Firestore")
-                                }
-                            } else {
-                                print("Error saving to Firestore: \(error?.localizedDescription ?? "unknown error")")
+            // Use the formatted date string in your file path
+            let path = "images/\(dateString).jpg"
+            
+            let fileRef = storageRef.child(path)
+
+            // Upload data
+            _ = fileRef.putData(imageData, metadata: nil) { metadata, error in
+                if error == nil && metadata != nil {
+                    print("Successfully uploaded image")
+
+                    let db = Firestore.firestore()
+                    db.collection("images").document().setData(["url": path]) { error in
+                        // If no error, display new image
+                        if error == nil {
+                            DispatchQueue.main.async {
+                                // Add uploaded image to list of images
+                                self.retrievedImages.append(selectedImage)
                             }
                         }
-                    } else {
-                        print("Error uploading: \(error?.localizedDescription ?? "unknown error")")
                     }
+                } else {
+                    print("Error uploading: \(error?.localizedDescription ?? "unknown error")")
                 }
             }
+        }
 
 }
 
@@ -273,11 +289,37 @@ class TaskCompleteViewController: UIViewController {
         messageLabel.textAlignment = .center
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         
+        // Close button
+        let closeButton = UIButton(type: .system)
+        closeButton.setTitle("Close", for: .normal)
+        closeButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        closeButton.setTitleColor(.white, for: .normal)
+        closeButton.backgroundColor = .systemBlue
+        closeButton.layer.cornerRadius = 10
+        closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        
         view.addSubview(messageLabel)
+        view.addSubview(closeButton)
         
         NSLayoutConstraint.activate([
             messageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            messageLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            messageLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
+            closeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            closeButton.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 30),
+            closeButton.widthAnchor.constraint(equalToConstant: 120),
+            closeButton.heightAnchor.constraint(equalToConstant: 44)
         ])
+    }
+    
+    @objc private func closeButtonTapped() {
+        // If presented modally
+        dismiss(animated: true, completion: nil)
+        
+        // If pushed onto navigation stack
+        if let navigationController = navigationController {
+            navigationController.popViewController(animated: true)
+        }
     }
 }
