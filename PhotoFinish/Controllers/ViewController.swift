@@ -273,11 +273,37 @@ class TaskCompleteViewController: UIViewController {
         messageLabel.textAlignment = .center
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         
+        // Close button
+        let closeButton = UIButton(type: .system)
+        closeButton.setTitle("Close", for: .normal)
+        closeButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        closeButton.setTitleColor(.white, for: .normal)
+        closeButton.backgroundColor = .systemBlue
+        closeButton.layer.cornerRadius = 10
+        closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        
         view.addSubview(messageLabel)
+        view.addSubview(closeButton)
         
         NSLayoutConstraint.activate([
             messageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            messageLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            messageLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
+            closeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            closeButton.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 30),
+            closeButton.widthAnchor.constraint(equalToConstant: 120),
+            closeButton.heightAnchor.constraint(equalToConstant: 44)
         ])
+    }
+    
+    @objc private func closeButtonTapped() {
+        // If presented modally
+        dismiss(animated: true, completion: nil)
+        
+        // If pushed onto navigation stack
+        if let navigationController = navigationController {
+            navigationController.popViewController(animated: true)
+        }
     }
 }

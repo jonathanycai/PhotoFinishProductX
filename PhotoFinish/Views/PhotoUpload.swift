@@ -14,19 +14,11 @@ struct PhotoUpload: View {
     let testImage = UIImage(named: "exampleUpload")
 
     @State var retrievedImages = [UIImage]()
+    @State private var showingSheet = false
 
     var body: some View {
         VStack {
-                // Display the test image
-                if let image = testImage {
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 200)
-                } else {
-                    Text("Test image not found")
-                        .foregroundColor(.red)
-                }
+                
 
                 Button {
                     uploadPhoto()
@@ -37,6 +29,13 @@ struct PhotoUpload: View {
                 .background(Color.blue)
                 .foregroundColor(.white)
                 .cornerRadius(8)
+            
+            Button("Show Sheet") {
+                        showingSheet = true
+                    }
+                    .sheet(isPresented: $showingSheet) {
+                        ContentView()
+                    }
 
             /// Display retrieved images
             Text("Retrieved Images (\(retrievedImages.count))")
@@ -81,8 +80,19 @@ struct PhotoUpload: View {
             return
         }
 
-        // Specify filepath and name
-        let path =  "images/\(UUID().uuidString).jpg"
+        // Get current date and time
+        let currentDate = Date()
+
+        // Create date formatter
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd_HH-mm-ss"  // Using underscore and dashes instead
+
+        // Format the date as a string
+        let dateString = dateFormatter.string(from: currentDate)
+
+        // Use the formatted date string in your file path
+        let path = "images/\(dateString).jpg"
+        
         let fileRef = storageRef.child(path)
 
         // Upload data
