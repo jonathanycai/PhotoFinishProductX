@@ -110,6 +110,12 @@ struct PhotoUpload: View {
                 .padding(.horizontal)
                 .padding(.bottom, 8)
                 
+                /// Display retrieved images
+                Text("Recently Completed Tasks")
+                    .font(.headline)
+                    .foregroundColor(Color(red:0.71, green:0.85, blue:0.97))
+
+
                 ScrollView {
                     LazyVStack(spacing: 16) {
                         // Group photos by day
