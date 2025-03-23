@@ -26,23 +26,24 @@ struct CalendarView: View {
             } else {
                 let days = generateMonthDays(for: monthDate, imagesByDate: imagesByDate)
                 VStack {
-                    Text(monthTitle(from: monthDate))
-                        .font(.title)
-                        .bold()
-                        .padding(.top)
-                        .foregroundStyle(.white)
-                        .overlay(
+                    Text("PhotoFinish")
+                        .font(.system(size: 32, weight: .bold))
+                        .foregroundStyle(
                             LinearGradient(
-                                gradient: Gradient(colors: [Color(.mainBlue), Color(.lightBlue)]),
+                                colors: [
+                                    Color.blue,
+                                    Color.cyan
+                                ],
                                 startPoint: .leading,
                                 endPoint: .trailing
                             )
                         )
-                        .mask(
-                            Text(monthTitle(from: monthDate))
-                                .font(.title)
-                                .fontWeight(.bold)
-                        )
+                    
+                    Text(monthTitle(from: monthDate))
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .padding(.top, 60)
+                        .foregroundStyle(.white)
                     
                     HStack(spacing: 0) {
                         ForEach(weekdaySymbols, id: \.self) { symbol in
@@ -60,6 +61,7 @@ struct CalendarView: View {
                             DayCell(day: day)
                         }
                     }
+                    Spacer()
                     .padding()
                 }
             }

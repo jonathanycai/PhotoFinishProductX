@@ -28,7 +28,7 @@ struct NewItemView: View {
                         .datePickerStyle(GraphicalDatePickerStyle())
                         .foregroundColor(.white)
                 }
-                .listRowBackground(Color.black)
+                .listRowBackground(Color.darkGray)
                 
                 // Use your existing TLButton here, just set background to purple
                 TLButton(title: "Save", background: .purple) {
@@ -51,7 +51,6 @@ struct NewItemView: View {
                 )
             }
         }
-        // Force dark mode & black background
         .background(Color.black.ignoresSafeArea())
         .preferredColorScheme(.dark)
     }

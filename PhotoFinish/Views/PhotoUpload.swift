@@ -50,9 +50,24 @@ struct PhotoUpload: View {
     var body: some View {
         ZStack {
             VStack {
-                Text("TODO For Today")
-                    .font(.headline)
-                    .padding(.top)
+                Text("PhotoFinish")
+                    .font(.system(size: 32, weight: .bold))
+                    .foregroundStyle(
+                        LinearGradient(
+                            colors: [
+                                Color.blue,
+                                Color.cyan
+                            ],
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                    )
+                
+                Text("To-Do For Today")
+                    .font(.system(size: 20, weight: .bold))
+                    .padding()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
                 List(items) { item in
                     ToDoListItemView(item: item)
                 }
@@ -61,8 +76,8 @@ struct PhotoUpload: View {
                 HStack {
                     VStack(alignment: .leading) {
                         Text("Task Completion")
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
+                            .font(.system(size: 20, weight: .medium))
+                            .foregroundColor(.white)
                         
                         HStack(spacing: 4) {
                             Text("\(Int(completionPercentage))%")
@@ -81,7 +96,7 @@ struct PhotoUpload: View {
                     // Progress circle
                     ZStack {
                         Circle()
-                            .stroke(Color.gray.opacity(0.2), lineWidth: 8)
+                            .stroke(Color.lightGray.opacity(0.8), lineWidth: 8)
                             .frame(width: 50, height: 50)
                         
                         Circle()
@@ -95,20 +110,16 @@ struct PhotoUpload: View {
                 .padding(.horizontal)
                 .padding(.bottom, 8)
                 
-                /// Display retrieved images
-                Text("Retrieved Images (\(retrievedImages.count))")
-                    .font(.headline)
-                
                 ScrollView {
-                    LazyVStack(spacing: 20) {
+                    LazyVStack(spacing: 16) {
                         // Group photos by day
                         ForEach(groupPhotosByDay().keys.sorted(by: >), id: \.self) { day in
                             if let photosIndicesForDay = groupPhotosByDay()[day] {
                                 Section {
                                     LazyVGrid(columns: [
-                                        GridItem(.flexible(), spacing: 12),
-                                        GridItem(.flexible(), spacing: 12),
-                                        GridItem(.flexible(), spacing: 12)
+                                        GridItem(.flexible(), spacing: 8),
+                                        GridItem(.flexible(), spacing: 8),
+                                        GridItem(.flexible(), spacing: 8)
                                     ], spacing: 12) {
                                         ForEach(photosIndicesForDay, id: \.self) { index in
                                             Image(uiImage: retrievedImages[index])
@@ -116,7 +127,6 @@ struct PhotoUpload: View {
                                                 .scaledToFill()
                                                 .frame(width: 100, height: 100)
                                                 .clipShape(RoundedRectangle(cornerRadius: 6))
-                                                .padding(4)
                                                 .onTapGesture {
                                                     selectedImage = retrievedImages[index]
                                                     isShowingFullscreen = true
@@ -126,9 +136,9 @@ struct PhotoUpload: View {
                                 } header: {
                                     HStack {
                                         Text(formatSectionHeader(for: day))
-                                            .font(.headline)
-                                            .foregroundColor(Color(red:0.71, green:0.85, blue:0.97))
-                                            .padding(.leading, 8)
+                                            .font(.system(size: 20, weight: .medium))
+                                            .foregroundColor(.white)
+                                            .padding(.top, 10)
                                         Spacer()
                                     }
                                 }

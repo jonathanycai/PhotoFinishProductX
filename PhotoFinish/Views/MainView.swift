@@ -21,13 +21,14 @@ struct MainView: View {
     @ViewBuilder
     var accountView: some View {
         TabView {
-            ToDoListView(userId: viewModel.currentUserId)
-                .tabItem {
-                    Label("List", systemImage:"list.clipboard")
-                }
             PhotoUpload(userId: viewModel.currentUserId)
                 .tabItem {
                     Label("Home", systemImage: "house")
+                }
+            
+            ToDoListView(userId: viewModel.currentUserId)
+                .tabItem {
+                    Label("List", systemImage:"list.clipboard")
                 }
             
             NavigationView {
