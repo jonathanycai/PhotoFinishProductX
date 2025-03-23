@@ -30,6 +30,15 @@ struct MainView: View {
                     Label("Home", systemImage: "house")
                 }
             
+            NavigationView {
+                CalendarView(
+                    monthDate: DateComponents(calendar: .current, year: 2025, month: 3).date!
+                )
+            }
+            .tabItem {
+                Label("Calendar", systemImage: "calendar")
+            }
+            
             ProfileView()
                 .tabItem {
                     Label("Profile", systemImage: "person.circle")
