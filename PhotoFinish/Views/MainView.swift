@@ -21,11 +21,11 @@ struct MainView: View {
     @ViewBuilder
     var accountView: some View {
         TabView {
-            PhotoUpload(userId: viewModel.currentUserId)
-                .tabItem {
-                    Label("New", systemImage:"plus")
-                }
             ToDoListView(userId: viewModel.currentUserId)
+                .tabItem {
+                    Label("List", systemImage:"list.clipboard")
+                }
+            PhotoUpload(userId: viewModel.currentUserId)
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }
@@ -38,11 +38,6 @@ struct MainView: View {
             .tabItem {
                 Label("Calendar", systemImage: "calendar")
             }
-            
-            ProfileView()
-                .tabItem {
-                    Label("Profile", systemImage: "person.circle")
-                }
         }
     }
 }
