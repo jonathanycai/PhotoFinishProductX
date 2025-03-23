@@ -16,9 +16,22 @@
 		89F2DD382D8F448500019072 /* PhotoFinish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoFinish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		A972D8B92D8F9A66008077C0 /* Exceptions for "PhotoFinish" folder in "PhotoFinish" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 89F2DD372D8F448500019072 /* PhotoFinish */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		89F2DD3A2D8F448500019072 /* PhotoFinish */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A972D8B92D8F9A66008077C0 /* Exceptions for "PhotoFinish" folder in "PhotoFinish" target */,
+			);
 			path = PhotoFinish;
 			sourceTree = "<group>";
 		};
