@@ -17,16 +17,21 @@ struct NewItemView: View {
                 .font(.system(size: 32))
                 .bold()
                 .padding(.top, 100)
+                .foregroundColor(.white)
             
             Form {
-                TextField("Title", text: $viewModel.title)
-                    .textFieldStyle(DefaultTextFieldStyle())
+                Section {
+                    TextField("Title", text: $viewModel.title)
+                        .foregroundColor(.white)
+                    
+                    DatePicker("Due Date", selection: $viewModel.dueDate)
+                        .datePickerStyle(GraphicalDatePickerStyle())
+                        .foregroundColor(.white)
+                }
+                .listRowBackground(Color.black)
                 
-                DatePicker("Due Date", selection: $viewModel.dueDate)
-                    .datePickerStyle(GraphicalDatePickerStyle())
-                
-                TLButton(title: "Save",
-                         background: .pink) {
+                // Use your existing TLButton here, just set background to purple
+                TLButton(title: "Save", background: .purple) {
                     if viewModel.canSave {
                         viewModel.save()
                         newItemPresented = false
@@ -34,16 +39,24 @@ struct NewItemView: View {
                         viewModel.showAlert = true
                     }
                 }
-                 .padding()
-                
+                .padding()
+                .listRowBackground(Color.black)
             }
+            // Hide default Form background (iOS 16+)
+            .scrollContentBackground(.hidden)
             .alert(isPresented: $viewModel.showAlert) {
-                Alert(title: Text("Error"),
-                      message: Text("Please fill in all fields and select due date that is today or new."))
+                Alert(
+                    title: Text("Error"),
+                    message: Text("Please fill in all fields and select a due date that is today or later.")
+                )
             }
         }
+        // Force dark mode & black background
+        .background(Color.black.ignoresSafeArea())
+        .preferredColorScheme(.dark)
     }
 }
+
 
 #Preview {
     NewItemView(newItemPresented: Binding(get: {
