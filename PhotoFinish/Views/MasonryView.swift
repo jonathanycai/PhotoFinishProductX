@@ -34,7 +34,7 @@ struct MasonryView: View {
                         .resizable()
                         .scaledToFit()
                         .cornerRadius(15)
-                        .shadow(color: Color(.lightBlue), radius: 5, x: 0, y: 0)
+                        .shadow(color: .cyan, radius: 5, x: 0, y: 0)
                 }
             }
             
@@ -44,7 +44,7 @@ struct MasonryView: View {
                         .resizable()
                         .scaledToFit()
                         .cornerRadius(15)
-                        .shadow(color: Color(.lightBlue), radius: 5, x: 0, y: 0)
+                        .shadow(color: .cyan, radius: 5, x: 0, y: 0)
                 }
             }
         }

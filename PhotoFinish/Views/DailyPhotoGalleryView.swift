@@ -10,7 +10,6 @@ import FirebaseStorage
 import Firebase
 
 struct DailyPhotoGalleryView: View {
-    //dummy change
     let date: Date
     @State private var dayImages: [UIImage] = []
     
@@ -29,19 +28,16 @@ struct DailyPhotoGalleryView: View {
                 VStack {
                     Text(formattedDay)
                         .font(.largeTitle)
-                        .foregroundColor(.white)
                         .fontWeight(.bold)
-                        .overlay(
+                        .foregroundStyle(
                             LinearGradient(
-                                gradient: Gradient(colors: [Color(.mainBlue), Color(.lightBlue)]),
+                                colors: [
+                                    Color.blue,
+                                    Color.cyan
+                                ],
                                 startPoint: .leading,
                                 endPoint: .trailing
                             )
-                        )
-                        .mask(
-                            Text(formattedDay)
-                                .font(.largeTitle)
-                                .fontWeight(.bold)
                         )
                     
                     Text("Daily tasks")

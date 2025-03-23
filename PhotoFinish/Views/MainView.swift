@@ -21,11 +21,13 @@ struct MainView: View {
     
     @ViewBuilder
     var accountView: some View {
+      
         TabView (selection:$selection){
             ToDoListView(userId: viewModel.currentUserId)
                 .tabItem {
                     Label("List", systemImage:"list.clipboard")
                 }.tag(1)
+
             PhotoUpload(userId: viewModel.currentUserId)
                 .tabItem {
                     Label("Home", systemImage: "house")

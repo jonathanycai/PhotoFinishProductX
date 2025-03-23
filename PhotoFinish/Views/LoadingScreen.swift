@@ -8,26 +8,21 @@
 import SwiftUI
 
 struct LoadingScreen: View {
-    //dummy change
     @State private var pulsate = false
 
     var body: some View {
         Text("Loading Memories...")
             .font(.largeTitle)
             .fontWeight(.bold)
-            .padding(.top, 40)
-            .scaleEffect(pulsate ? 1.2 : 1.0)
-            .overlay(
+            .foregroundStyle(
                 LinearGradient(
-                    gradient: Gradient(colors: [Color(.mainBlue), Color(.lightBlue)]),
+                    colors: [
+                        Color.blue,
+                        Color.cyan
+                    ],
                     startPoint: .leading,
                     endPoint: .trailing
                 )
-            )
-            .mask(
-                Text("Loading Memories...")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
             )
             .onAppear {
                 withAnimation(
