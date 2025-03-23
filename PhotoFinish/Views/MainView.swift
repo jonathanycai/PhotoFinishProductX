@@ -21,6 +21,10 @@ struct MainView: View {
     @ViewBuilder
     var accountView: some View {
         TabView {
+            PhotoUpload(userId: viewModel.currentUserId)
+                .tabItem {
+                    Label("New", systemImage:"plus")
+                }
             ToDoListView(userId: viewModel.currentUserId)
                 .tabItem {
                     Label("Home", systemImage: "house")
