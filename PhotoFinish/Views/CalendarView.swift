@@ -53,7 +53,6 @@ struct CalendarView: View {
                                 .foregroundStyle(.white)
                         }
                     }
-                    .padding(.horizontal)
                     .padding(.top, 8)
                     
                     LazyVGrid(columns: columns, spacing: 10) {
